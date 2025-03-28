@@ -203,26 +203,19 @@ desc.pack(pady=10)
 btns_frame = Frame(root)
 btns_frame.pack(expand=True, fill=X)
 
-col1_frame = Frame(btns_frame)
-col1_frame.pack(expand=True, fill=X)
+widgets=["label","button", "entry", "text", "checkbutton", "radiobutton", "listbox",
+        "combobox", "scale", "spinbox", "progressbar", "canvas", "scrollbar", 
+        "menubutton", "open and save", "messagebox"]
 
-for widget in ["label", "button", "entry", "text", "checkbutton", "radiobutton", "listbox"]:
-    btn = Button(col1_frame, text=widget.capitalize(), command=lambda w=widget: on_button_click(w))
-    btn.pack(side=LEFT, padx=5, pady=5, expand=True, fill=X) 
 
-col2_frame = Frame(btns_frame)
-col2_frame.pack(expand=True, fill=X)
+# Place buttons in a grid layout
+for n, widget in enumerate(widgets):
+    btn = Button(btns_frame, text=widget.capitalize(), command=lambda w=widget: on_button_click(w))
+    # Use grid to place buttons in rows and columns
+    btn.grid(row=n // 5, column=n % 5, padx=5, pady=5, sticky="ew")
 
-for widget in ["combobox", "scale", "spinbox", "progressbar", "canvas", "scrollbar","menubutton"]:
-    btn = Button(col2_frame, text=widget.capitalize(), command=lambda w=widget: on_button_click(w))
-    btn.pack(side=LEFT, padx=5, pady=5, expand=True, fill=X) 
+for col in range(5):  
+    btns_frame.grid_columnconfigure(col, weight=1)
     
-col3_frame = Frame(btns_frame) 
-col3_frame.pack(expand=True, fill=X)
-
-for widget in ["open and save","messagebox"]:
-    btn = Button(col3_frame, text=widget.capitalize(), command=lambda w=widget: on_button_click(w))
-    btn.pack(side=LEFT, padx=5, pady=5, expand=True, fill=X) 
-
 # Run the application
 root.mainloop()
