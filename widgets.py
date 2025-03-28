@@ -188,6 +188,33 @@ def on_button_click(widget):
           yesno_btn.pack(pady=5)
           retrycancel_btn = Button(top, text="Ask Retry/Cancel", command=ask_retrycancel)
           retrycancel_btn.pack(pady=5)
+        case "events":
+            Label(top, text="Events Example:").pack()
+            Label(top, text="Press a key\nClick or Double-Click the mouse\nOr move the mouse over the window").pack()
+            output = Text(top, height=5, width=40)
+            output.pack(pady=10)
+            
+            def on_key(event):
+                output.delete(1.0, END)
+                output.insert(INSERT, f"Key Pressed: {event.char}")
+            def on_click(event):
+                output.delete(1.0, END)
+                output.insert(INSERT, f"Mouse clicked at: {event.x}, {event.y}")
+            def on_dbclick(event):
+                output.delete(1.0, END)
+                output.insert(INSERT, f"Mouse double-clicked at: {event.x}, {event.y}")
+            def on_leave(event):
+                output.delete(1.0, END)
+                output.insert(INSERT, f"Mouse left the window")
+            def on_enter(event):
+                output.delete(1.0, END)
+                output.insert(INSERT, f"Mouse entered the window")
+                
+            top.bind("<Key>", on_key)
+            top.bind("<Button-1>", on_click)
+            top.bind("<Double-1>", on_dbclick)
+            top.bind("<Leave>", on_leave)
+            top.bind("<Enter>", on_enter)
         case _:
             pass
 
@@ -205,7 +232,7 @@ btns_frame.pack(expand=True, fill=X)
 
 widgets=["label","button", "entry", "text", "checkbutton", "radiobutton", "listbox",
         "combobox", "scale", "spinbox", "progressbar", "canvas", "scrollbar", 
-        "menubutton", "open and save", "messagebox"]
+        "menubutton", "open and save", "messagebox","events"]
 
 
 # Place buttons in a grid layout
