@@ -11,7 +11,7 @@ def load_scripts_from_file(file_path):
         with open(file_path, "r") as file:
             return [line.strip() for line in file if line.strip()]
     except Exception as e:
-        messagebox.showwarning("Warning", f"Failed to load scripts_list.txt\nCreate an empty one...")
+        messagebox.showwarning("Warning", f"Failed to load {scripts_file_path}\nCreate an empty one...")
         open(file_path, "w").close()
         return []
 
@@ -78,7 +78,7 @@ root.grid_rowconfigure(6, weight=1)  # Make the output frame row expandable
 root.grid_columnconfigure(1, weight=1)  # Make the middle column (entries and text) expandable
 
 # Load shell scripts from a file
-scripts_file_path = "scripts_list.txt"  # Replace with the path to your file
+scripts_file_path = f"{os.getenv('HOME')}/scriptsExe.sav"  # Replace with the path to your file
 scripts_list = load_scripts_from_file(scripts_file_path)
 
 desc="""
@@ -90,7 +90,7 @@ Save the script to the list by checking the checkbox.
 """
 
 # Create and place widgets
-tk.Label(root, text="Shell Script Executor", font=("Helvetica", 14)).grid(row=0, column=0, columnspan=3, pady=10)
+tk.Label(root, text="Shell Script Executor", font=("Arial", 14, "bold")).grid(row=0, column=0, columnspan=3, pady=10)
 tk.Label(root, text=desc).grid(row=1, column=0, columnspan=4)
 
 tk.Label(root, text="Available Scripts:").grid(row=2, column=0, padx=10, pady=10, sticky="w")
