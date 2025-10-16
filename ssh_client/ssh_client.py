@@ -2,6 +2,7 @@
 
 import paramiko
 import time
+import getpass  # Import getpass for secure password input
 
 def ssh_client(host, port, username, password):
     try:
@@ -52,6 +53,6 @@ if __name__ == "__main__":
     host = input("Enter the SSH server hostname or IP: ")
     port = int(input("Enter the SSH server port (default 22): ") or 22)
     username = input("Enter your username: ")
-    password = input("Enter your password: ")
+    password = getpass.getpass("Enter your password: ")  # Use getpass for invisible password input
 
     ssh_client(host, port, username, password)
